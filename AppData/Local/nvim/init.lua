@@ -58,10 +58,10 @@ augroup END
 
 require "paq"{
     "savq/paq-nvim";
+    "SirVer/ultisnips";
     "neovim/nvim-lspconfig";
     "nvim-lua/completion-nvim";
-    "kristijanhusak/completion-tags";
-    {"nvim-treesitter/nvim-treesitter"}
+    "nvim-treesitter/nvim-treesitter"
 }
 
 -- Setup LSP
@@ -69,14 +69,23 @@ require "paq"{
 require "lspconfig".pylsp.setup{on_attach=require'completion'.on_attach}
 require "lspconfig".ccls.setup{on_attach=require'completion'.on_attach}
 
--- Setup completion
+-- Setup TreeSitter
 
-g["completion_chain_complete_list"] = "{'default':[{'complete_items':['lsp', 'tags']}]}"
---cmd [[
---let g:completion_chain_complete_list = { 'default': [ {'complete_items': ['lsp', 'tags']}, ]}
---]]
+require "nvim-treesitter.configs".setup{
+    highlight = {enable = true,
+--        disable = {"python"},
+        additional_vim_regex_highlighting = python
+    },
+    indent = {enable = true}
+}
+require "nvim-treesitter.install".compilers = { "cl" }
 
---Setup TreeSitter
+-- Setup Completion-Nvim
+g["completion_enable_snippet"] = "UltiSnips"
 
-require "nvim-treesitter.configs".setup{highlight = {enable = true}}
-require "nvim-treesitter.install".compilers = { "clang" }
+-- Setup UltiSnips
+g["UltiSnipsExpandTrigger"] = "<tab>"
+g["UltiSnipsJumpForwardTrigger"] = "<c-f>"
+g["UltiSnipsJumpBackwardTrigger"] = "<c-b>"
+g["UltiSnipsSnippetDirectories"] = {"MieleSnips"}
+g["UltiSnipsSnippetsDir"] = "C:/Users/derav/AppData/Local/nvim/MieleSnips"
