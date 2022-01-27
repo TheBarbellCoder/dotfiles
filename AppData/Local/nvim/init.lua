@@ -76,8 +76,8 @@ require "nvim-treesitter.configs".setup{
 --        disable = {"python"},
         additional_vim_regex_highlighting = python
     },
-    indent = {enable = true}
 }
+
 require "nvim-treesitter.install".compilers = { "cl" }
 
 -- Setup Completion-Nvim
