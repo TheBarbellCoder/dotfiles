@@ -41,10 +41,12 @@ opt.clipboard = "unnamedplus"
 opt.number = true
 opt.colorcolumn = '80'
 opt.relativenumber = true
-opt.completeopt = {"menuone", "noinsert", "noselect"}
+opt.completeopt = {"menuone", "noinsert"}
 
-cmd [[ set formatoptions+=t
+cmd [[
+set formatoptions+=t
 set formatoptions-=l
+filetype plugin indent on
 ]]
 
 cmd [[
@@ -59,31 +61,31 @@ augroup END
 require "paq"{
     "savq/paq-nvim";
     "SirVer/ultisnips";
+    "Shougo/deoplete.nvim";
+    "windwp/nvim-autopairs";
     "neovim/nvim-lspconfig";
-    "nvim-lua/completion-nvim";
-    "nvim-treesitter/nvim-treesitter"
+    "Shougo/deoplete-clangx";
+    "NLKNguyen/papercolor-theme"
 }
 
 -- Setup LSP
 
-require "lspconfig".pylsp.setup{on_attach=require'completion'.on_attach}
-require "lspconfig".ccls.setup{on_attach=require'completion'.on_attach}
-
--- Setup TreeSitter
-
-require "nvim-treesitter.configs".setup{
-    highlight = {enable = true,
---        disable = {"python"},
-        additional_vim_regex_highlighting = python
-    },
+require "lspconfig".pylsp.setup{}
+require "lspconfig".clangd.setup{
+    cmd = { "clangd", "--background-index", "--suggest-missing-includes"},
+    filetypes = {"c", "cpp", "cxx", "h", "hpp"},
 }
 
-require "nvim-treesitter.install".compilers = { "cl" }
+cmd[[
+call deoplete#custom#var('clangx', 'clang_binary', 'C:\Tools\llvm\bin')
+]]
 
--- Setup Completion-Nvim
-g["completion_enable_snippet"] = "UltiSnips"
+-- Setup Auto-pairs
+
+require "nvim-autopairs".setup{}
 
 -- Setup UltiSnips
+
 g["UltiSnipsExpandTrigger"] = "<tab>"
 g["UltiSnipsJumpForwardTrigger"] = "<c-f>"
 g["UltiSnipsJumpBackwardTrigger"] = "<c-b>"
