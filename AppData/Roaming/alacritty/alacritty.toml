@@ -1,0 +1,63 @@
+[font]
+normal = { family = "Geist Mono", style = "Regular" }
+bold = { family = "Geist Mono", style = "SemiBold" }
+italic = { family = "Geist Mono", style = "Italic" }
+bold_italic = { family = "Geist Mono", style = "SemiBold Italic" }
+size = 12.0
+
+[window]
+dynamic_title = true
+opacity = 0.95
+decorations = "full"
+startup_mode = "Windowed"
+dimensions = { columns = 100, lines = 30 }
+padding = { x = 8, y = 8 }
+
+[scrolling]
+history = 100000
+multiplier = 3
+
+[cursor]
+style = { shape = "Block", blinking = "On" }
+blink_interval = 500
+
+[colors.primary]
+background = "#0a0a0a"      # Geist UI background
+foreground = "#ededed"      # Geist UI foreground
+
+[colors.cursor]
+text = "#171717"
+cursor = "#0d8c7d"          # Geist accent color
+
+[colors.selection]
+text = "#171717"
+background = "#0ac5b3"      # Geist selection color
+
+[colors.normal]
+black   = "#0a0a0a"
+red     = "#ff6369"
+green   = "#63c174"
+yellow  = "#f1a10d"
+blue    = "#52a9ff"
+magenta = "#bf7af0"
+cyan    = "#0ac5b3"
+white   = "#ededed"
+
+[colors.bright]
+black   = "#a0a0a0"
+red     = "#ff6369"
+green   = "#63c174"
+yellow  = "#f1a10d"
+blue    = "#52a9ff"
+magenta = "#bf7af0"
+cyan    = "#0ac5b3"
+white   = "#ededed"
+
+[terminal]
+shell = "powershell"
+
+[mouse]
+hide_when_typing = true
+
+[env]
+TERM = "xterm-256color"
