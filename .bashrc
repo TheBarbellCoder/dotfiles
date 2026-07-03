@@ -141,7 +141,7 @@ load-nix-env(){
         export NIX_SOURCED=1
     fi
 
-    nix-shell ~/Projects/nix-shells/"$1".nix
+    nix-shell ~/Projects/experimental/avinash/nix-utils/"$1".nix
 }
 
 alias lnx='load-nix-env'
@@ -159,7 +159,7 @@ source ~/.config/broot/launcher/bash/br
 
 FZF_DEFAULT_OPTS="--style=full --color=base16 --layout=reverse --no-height"
 
-FZF_CTRL_T_OPTS=" 
+FZF_CTRL_T_OPTS="
     --walker-skip .git
     --preview 'batcat -n --color=always {}'"
 
@@ -173,7 +173,7 @@ FZF_ALT_C_OPTS="
 #                              Git Configuration                             #
 ##############################################################################
 
-git-checkout(){
+git-checkout-branch(){
     local branch
     branch=$(git branch -a --color=always --sort=-committerdate --format='%(refname:short)' \
         | grep -v '/HEAD$' \
@@ -189,7 +189,9 @@ git-checkout(){
 
 alias gcm='git commit'
 alias gst='git status'
-alias gck='git-checkout'
+alias gpl='git pull'
+alias gph='git push'
+alias gcb='git-checkout-branch'
 
 ##############################################################################
 
@@ -220,7 +222,7 @@ z(){
         __zoxide_cd "$1"
     else
         zi "$*"
-    fi        
+    fi
 }
 
 ##############################################################################
@@ -228,3 +230,15 @@ z(){
 ##############################################################################
 
 eval "$(starship init bash)"
+
+##############################################################################
+###                                                                        ###
+###                                 PATH                                   ###
+###                                                                        ###
+##############################################################################
+
+export PATH="/home/avinash/Projects/commonapi_core_generator_3.2.15\
+:/home/avinash/Projects/commonapi_someip_generator_3.2.15\
+:/home/avinash/.cargo/bin\
+:/home/avinash/.local/bin\
+:$PATH"
