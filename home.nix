@@ -39,11 +39,11 @@
   programs.bash = {
     enable = true;
     initExtra = ''
-    export DELTA_FEATURES=+side-by-side
-    # Run fastfetch only in interactive sessions
-    if [[ $- == *i* ]]; then
-      fastfetch
-    fi
+      export DELTA_FEATURES=+side-by-side
+      # Run fastfetch only in interactive sessions
+      if [[ $- == *i* ]]; then
+        fastfetch
+      fi
     '';
   };
   programs.starship.enable = true;

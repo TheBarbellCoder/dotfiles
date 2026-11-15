@@ -26,13 +26,25 @@ in
     ./hardware-configuration.nix
   ];
 
+  boot.loader.efi.canTouchEfiVariables = false;
+
   # Use the systemd-boot EFI boot loader.
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.systemd-boot.enable = false;
+  # boot.loader.systemd-boot.configurationLimit = 3;
 
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.systemd-boot.configurationLimit = 3;
+  # Use Limnie EFI boot loader.
+  boot.loader.limine = {
+    enable = true;
+    efiSupport = true;
+    maxGenerations = 3;
+    efiInstallAsRemovable = true;
+    style = {
+      interface.resolution = "3840x2160";
+      graphicalTerminal.font.scale = "2x2";
+    };
+  };
 
-  # networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "nix-station"; # Define your hostname.
 
   # Configure network connections interactively with nmcli or nmtui.
   networking.networkmanager.enable = true;
@@ -119,6 +131,10 @@ in
     thunderbird
   ];
 
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-41.10.7" # Explicit permission required after EOL
+  ];
+
   # setup fonts
   fonts.packages = with pkgs; [
     nunito
@@ -134,6 +150,8 @@ in
   };
 
   # List services that you want to enable:
+
+  services.tailscale.enable = true;
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
