@@ -39,7 +39,16 @@
   programs.bash = {
     enable = true;
     initExtra = ''
+
+      rebuild-os(){
+        local tag
+        tag=$(git =C "/etc/nixos" describe --tags --always --dirty) || return
+        NIXOS_LABEL="$tag"
+        sudo --preserve-env=NIXOS_LABEL nixos-rebuild "''${1:-switch}"
+      }
+      
       export DELTA_FEATURES=+side-by-side
+
       # Run fastfetch only in interactive sessions
       if [[ $- == *i* ]]; then
         fastfetch
